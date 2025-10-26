@@ -38,3 +38,10 @@ A responsive hotel booking web application built with **React + TypeScript** tha
 | **Deployment** | Vercel |
 
 ---
+
+## ⚙️ Installation & Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/hotel-reservation-system.git
+   cd hotel-reservation-system
