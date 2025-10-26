@@ -2,18 +2,41 @@ import type { RegisterData } from "@/types/types";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
-const API_URL = "http://localhost:3005/users";
+const BIN_URL = "https://api.jsonbin.io/v3/b/68fe2b7943b1c97be9824fce";
+
+const MASTER_KEY = import.meta.env.VITE_JSONBIN_KEY;
 
 export const useRegister = () => {
   return useMutation({
     mutationFn: async (data: RegisterData) => {
-      const existing = await axios.get(`${API_URL}?email=${data.email}`);
-      if (existing.data.length > 0) {
+      console.log("MASTER_KEY:", MASTER_KEY);
+
+      const res = await axios.get(BIN_URL, {
+        headers: {
+          "X-Master-Key": MASTER_KEY,
+        },
+      });
+
+      const existingData = res.data.record;
+      const users = existingData.users || [];
+
+      if (users.some((u: RegisterData) => u.email === data.email)) {
         throw new Error("Email already exists");
       }
 
-      const res = await axios.post(API_URL, data);
-      return res.data;
+      const updated = {
+        ...existingData,
+        users: [...users, data],
+      };
+
+      const updateRes = await axios.put(BIN_URL, updated, {
+        headers: {
+          "Content-Type": "application/json",
+          "X-Master-Key": MASTER_KEY,
+        },
+      });
+
+      return updateRes.data;
     },
   });
 };

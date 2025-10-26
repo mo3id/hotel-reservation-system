@@ -17,7 +17,7 @@ export const createBooking = createAsyncThunk(
   async (bookingData: Booking, { rejectWithValue }) => {
     try {
       const res = await axios.post(
-        "http://localhost:3005/bookings",
+        "https://api.jsonbin.io/v3/b/68fe2b7943b1c97be9824fce/bookings",
         bookingData
       );
       return res.data;

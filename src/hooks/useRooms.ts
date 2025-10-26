@@ -2,28 +2,28 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import type { Room } from "@/types/types";
 
+const BIN_URL = "https://api.jsonbin.io/v3/b/68fe2b7943b1c97be9824fce";
+
+const MASTER_KEY = import.meta.env.VITE_JSONBIN_KEY;
+
 const fetchRooms = async (page: number, limit: number) => {
-  const response = await axios.get<Room[]>(
-    `http://localhost:3005/rooms?_page=${page}&_limit=${limit}`,
-    {
-      headers: {
-        Accept: "application/json",
-      },
-    }
-  );
+  console.log("MASTER_KEY:", MASTER_KEY);
+  const res = await axios.get(BIN_URL, {
+    headers: {
+      "X-Master-Key": MASTER_KEY,
+    },
+  });
 
-  const totalCountHeader =
-    response.headers["x-total-count"] || response.headers["X-Total-Count"];
+  const record = res.data.record;
+  const rooms: Room[] = record.rooms || [];
 
-  let totalCount: number;
+  const totalCount = rooms.length;
 
-  if (totalCountHeader) {
-    totalCount = parseInt(totalCountHeader, 10);
-  } else {
-    const allRooms = await axios.get<Room[]>(`http://localhost:3005/rooms`);
-    totalCount = allRooms.data.length;
-  }
-  return { rooms: response.data, totalCount };
+  const start = (page - 1) * limit;
+  const end = start + limit;
+  const paginatedRooms = rooms.slice(start, end);
+
+  return { rooms: paginatedRooms, totalCount };
 };
 
 export const useRooms = (page: number, limit: number) => {
