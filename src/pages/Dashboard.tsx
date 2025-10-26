@@ -46,15 +46,15 @@ export default function Dashboard() {
               </div>
 
               <img
-                src={booking.room.image}
-                alt={booking.room.title}
+                src={booking?.room?.image}
+                alt={booking?.room?.title}
                 className="w-full h-40 object-cover"
                 onError={(e) => (e.currentTarget.src = "/images/stayEase.png")}
               />
               <CardContent className="p-4 space-y-2">
-                <h3 className="font-semibold text-lg">{booking.room.title}</h3>
+                <h3 className="font-semibold text-lg">{booking?.room?.title}</h3>
                 <p className="text-sm text-gray-500">
-                  {booking.room.hotelName}
+                  {booking?.room?.hotelName}
                 </p>
                 <p className="text-sm">
                   {booking.checkInDate} → {booking.checkOutDate}

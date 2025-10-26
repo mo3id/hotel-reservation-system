@@ -56,6 +56,7 @@ export default function RoomDetails() {
     const totalPrice = room.pricePerNight * days;
 
     const booking = {
+      id: Date.now(),
       userId: user.id,
       roomId: room.id,
       checkInDate: dateRange.from.toISOString().split("T")[0],
