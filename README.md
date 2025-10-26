@@ -44,4 +44,8 @@ A responsive hotel booking web application built with **React + TypeScript** tha
 1. **Clone the repository**
    ```bash
    git clone https://github.com/your-username/hotel-reservation-system.git
-   cd hotel-reservation-system
+   cd hotel-reservation-system```
+
+2. **Install dependencies**
+   ```bash
+   npm install
