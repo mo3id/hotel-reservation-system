@@ -49,3 +49,14 @@ A responsive hotel booking web application built with **React + TypeScript** tha
 2. **Install dependencies**
    ```bash
    npm install
+
+3. **Create `.env` file** in the project root and add your JSONBin API key:
+   ```bash
+   VITE_JSONBIN_KEY=$2a$10$BDLuwLLeJ6BZRRkUQaFEGO4sRfWMuX2Ur8V2cpoPWqInKw/G.7jb.
+
+4. **Run the development server**
+   ```bash
+   npm run dev
+5. **Open your browser and go to:**
+   ```bash
+   npm run dev
