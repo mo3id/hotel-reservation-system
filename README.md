@@ -59,4 +59,4 @@ A responsive hotel booking web application built with **React + TypeScript** tha
    npm run dev
 5. **Open your browser and go to:**
    ```bash
-   npm run dev
+   [npm run dev](http://localhost:5173/)
