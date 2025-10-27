@@ -186,16 +186,19 @@ export default function RoomDetails() {
         )}
 
         <Button
-          className={`mt-4${
-            !room.isAvailable && " opacity-50 cursor-not-allowed"
+          className={`mt-4 ${
+            !room.isAvailable ? "opacity-50 cursor-not-allowed" : ""
           }`}
-          disabled={!canBook || loading}
-          onClick={handleBook}
+          disabled={!canBook || loading || !room.isAvailable}
+          onClick={() => {
+            if (!room.isAvailable) return;    
+            handleBook();
+          }}
         >
           {!room.isAvailable
             ? "Room Not Available"
             : canBook
-            ? "Book Now"
+            ? " btm Now"
             : loading
             ? "Booking..."
             : "Select Dates to Book"}
