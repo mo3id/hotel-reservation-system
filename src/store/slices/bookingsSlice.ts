@@ -6,6 +6,9 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const BIN_URL = "https://api.jsonbin.io/v3/b/68fe2b7943b1c97be9824fce";
+const MASTER_KEY = import.meta.env.VITE_JSONBIN_KEY;
+
 const initialState: BookingState = {
   bookings: [],
   loading: false,
@@ -16,11 +19,35 @@ export const createBooking = createAsyncThunk(
   "bookings/createBooking",
   async (bookingData: Booking, { rejectWithValue }) => {
     try {
-      const res = await axios.post(
-        "https://api.jsonbin.io/v3/b/68fe2b7943b1c97be9824fce/bookings",
-        bookingData
+      // 1️⃣ نجلب الـ bin الحالي
+      const res = await axios.get(BIN_URL, {
+        headers: { "X-Master-Key": MASTER_KEY },
+      });
+
+      const record = res.data.record;
+      const bookings: Booking[] = record.bookings || [];
+
+      // 2️⃣ نضيف الحجز الجديد
+      const newBooking: Booking = {
+        ...bookingData,
+        id: bookings.length ? bookings[bookings.length - 1].id + 1 : 1,
+      };
+
+      const updatedBookings = [...bookings, newBooking];
+
+      // 3️⃣ نحدث الـ bin كامل
+      await axios.put(
+        BIN_URL,
+        { ...record, bookings: updatedBookings },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "X-Master-Key": MASTER_KEY,
+          },
+        }
       );
-      return res.data;
+
+      return newBooking;
     } catch (err: Error | unknown) {
       const error = err as Error;
       return rejectWithValue(error.message || "Failed to create booking");

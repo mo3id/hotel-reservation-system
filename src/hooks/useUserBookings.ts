@@ -12,8 +12,6 @@ export const useUserBookings = (userId: number | undefined) => {
     queryFn: async () => {
       if (!userId) return [];
 
-      console.log("MASTER_KEY:", MASTER_KEY);
-
       const res = await axios.get(BIN_URL, {
         headers: { "X-Master-Key": MASTER_KEY },
       });
