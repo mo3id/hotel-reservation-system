@@ -19,7 +19,6 @@ export const createBooking = createAsyncThunk(
   "bookings/createBooking",
   async (bookingData: Booking, { rejectWithValue }) => {
     try {
-      // 1️⃣ نجلب الـ bin الحالي
       const res = await axios.get(BIN_URL, {
         headers: { "X-Master-Key": MASTER_KEY },
       });
@@ -27,7 +26,6 @@ export const createBooking = createAsyncThunk(
       const record = res.data.record;
       const bookings: Booking[] = record.bookings || [];
 
-      // 2️⃣ نضيف الحجز الجديد
       const newBooking: Booking = {
         ...bookingData,
         id: bookings.length ? bookings[bookings.length - 1].id + 1 : 1,
@@ -35,7 +33,6 @@ export const createBooking = createAsyncThunk(
 
       const updatedBookings = [...bookings, newBooking];
 
-      // 3️⃣ نحدث الـ bin كامل
       await axios.put(
         BIN_URL,
         { ...record, bookings: updatedBookings },
