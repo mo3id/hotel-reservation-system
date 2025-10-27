@@ -1,75 +1,62 @@
-# React + TypeScript + Vite
+# 🏨 Hotel Reservation System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive hotel booking web application built with **React + TypeScript** that allows users to browse rooms, book reservations, and manage their bookings easily.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Live Demo
+🔗 [https://hotel-reservation-system-rose.vercel.app/](https://hotel-reservation-system-rose.vercel.app/)
 
-## React Compiler
+---
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## 💡 Features
 
-Note: This will impact Vite dev & build performances.
+- 🏠 View all available hotel rooms with pagination and filters
+- 🔍 Search & filter by room type and price range
+- 🧾 Room details with amenities and price per night
+- 💳 Book a room with check-in and check-out dates
+- 👤 User authentication (Sign Up / Sign In)
+- 📅 Manage user bookings and cancel reservations
+- ⚡ State management with Redux Toolkit
+- 🔄 Data fetching & mutations handled by **React Query**
+- ☁️ Backend simulation using **JSONBin API**
+- 🌍 Deployed frontend on **Vercel**
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+| Category | Technology |
+|-----------|-------------|
+| **Frontend** | React + TypeScript + Vite |
+| **State Management** | Redux Toolkit |
+| **Data Fetching** | React Query |
+| **UI Library** | Tailwind CSS + Shadcn/UI |
+| **Icons** | Lucide React |
+| **Routing** | React Router DOM |
+| **API / Backend** | JSONBin.io |
+| **Deployment** | Vercel |
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## ⚙️ Installation & Setup
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/hotel-reservation-system.git
+   cd hotel-reservation-system```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+2. **Install dependencies**
+   ```bash
+   npm install
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+3. **Create `.env` file** in the project root and add your JSONBin API key:
+   ```bash
+   VITE_JSONBIN_KEY=$2a$10$BDLuwLLeJ6BZRRkUQaFEGO4sRfWMuX2Ur8V2cpoPWqInKw/G.7jb.
+
+4. **Run the development server**
+   ```bash
+   npm run dev
+5. **Open your browser and go to:**
+   ```bash
+     http://localhost:5173/
